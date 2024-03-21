@@ -1,3 +1,5 @@
+![Build and Test](https://github.com/square1-io/laravel-collection-rolling-average/actions/workflows/laravel.yml/badge.svg)
+
 # Add Rolling Average Functionality To Collections
 
 This package adds a rolling average functionality to Laravel's `Collection` facade. Rolling averages (also known as moving averages) are a statistic to capture the average change in a data range over time. For example, looking at a graph of daily temperature, or stock market movement, the graph may appear very noisy and erratic. The graph can be smoothed out to show longer-term trends by replacing each daily data point with an average of the previous N days.
