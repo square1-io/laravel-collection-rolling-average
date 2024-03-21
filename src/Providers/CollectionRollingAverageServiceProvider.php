@@ -12,16 +12,16 @@ class CollectionRollingAverageServiceProvider extends ServiceProvider
         /**
          * Rolling average macro.
          *
-         * @param int $recordsToAverage  How many records to look back when creating the average
-         * @param bool $enforceLookback  Only average $recordsToAverage values, i.e. if asked to average 5 entries,
-         *                               don't attempt to average anything until the 5th entry.
-         * @param Collection $weightings Weightings to apply to values. This allows different importance
-         *                               to be applied to different values. First value is applied to most
-         *                               recent addition to rolling average.
+         * @param  int  $recordsToAverage  How many records to look back when creating the average
+         * @param  bool  $enforceLookback  Only average $recordsToAverage values, i.e. if asked to average 5 entries,
+         *                                 don't attempt to average anything until the 5th entry.
+         * @param  Collection  $weightings  Weightings to apply to values. This allows different importance
+         *                                  to be applied to different values. First value is applied to most
+         *                                  recent addition to rolling average.
          */
-        Collection::macro('rollingAverage', function (int $recordsToAverage = null, bool $enforceLookback = false, Collection $weights = null) {
+        Collection::macro('rollingAverage', function (?int $recordsToAverage = null, bool $enforceLookback = false, ?Collection $weights = null) {
             if ($recordsToAverage === null
-                || ($recordsToAverage > $this->count() && !$enforceLookback)) {
+                || ($recordsToAverage > $this->count() && ! $enforceLookback)) {
                 $recordsToAverage = $this->count();
             }
             // The number of weights shouldn't exceed our recordsToAverage - trim it down if so.
@@ -44,12 +44,12 @@ class CollectionRollingAverageServiceProvider extends ServiceProvider
                 // Set should be this item, and X preceding
                 // For each in set, multiply by available weight
                 if ($weights) {
-                    $startingPoint = max(0, ($index+1) - $recordsToAverage);
-                    $recordsToTake = min($index+1, $recordsToAverage);
+                    $startingPoint = max(0, ($index + 1) - $recordsToAverage);
+                    $recordsToTake = min($index + 1, $recordsToAverage);
                     $weighted = $this->slice($startingPoint, $recordsToTake)->reverse();
 
                     foreach ($weighted->values() as $weightIndex => $item) {
-                        if (!empty($weights[$weightIndex])) {
+                        if (! empty($weights[$weightIndex])) {
                             $weightedAverage->prepend($weights[$weightIndex] * $item);
                         } else {
                             $weightedAverage->prepend($item);

@@ -3,11 +3,12 @@
 namespace Square1\CollectionRollingAverage\Test\Macros;
 
 use Illuminate\Support\Collection;
+use PHPUnit\Framework\Attributes\Test;
 use Square1\CollectionRollingAverage\Test\TestCase;
 
 class CollectionRollingAverageTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function rollling_average_is_calculated_without_limit()
     {
         $data = new Collection([1, 2, 3]);
@@ -17,7 +18,7 @@ class CollectionRollingAverageTest extends TestCase
         $this->assertEquals($averages, $data->rollingAverage());
     }
 
-    /** @test */
+    #[Test]
     public function rollling_average_is_calculated_with_lookback_limit()
     {
         $data = new Collection([1, 2, 3, 4, 5, 6]);
@@ -29,13 +30,13 @@ class CollectionRollingAverageTest extends TestCase
             2.5,    // 2+3 / 2
             3.5,    // 3+4 / 2
             4.5,    // 4+5 / 2
-            5.5     // 5+6 / 2
+            5.5,     // 5+6 / 2
         ]);
 
         $this->assertEquals($averages, $data->rollingAverage(2));
     }
 
-    /** @test */
+    #[Test]
     public function rollling_average_is_calculated_with_lookback_limit_larger_than_set()
     {
         $data = new Collection([1, 2, 3]);
@@ -46,7 +47,7 @@ class CollectionRollingAverageTest extends TestCase
         $this->assertEquals($averages, $data->rollingAverage(5));
     }
 
-    /** @test */
+    #[Test]
     public function enforced_lookback_returns_smaller_set()
     {
         $data = new Collection([1, 2, 3, 4, 5, 6]);
@@ -62,7 +63,7 @@ class CollectionRollingAverageTest extends TestCase
         $this->assertEquals($averages, $data->rollingAverage(3, $enforceLookback = true));
     }
 
-    /** @test */
+    #[Test]
     public function enforced_lookback_larger_than_set_returns_empty_collection()
     {
         $data = new Collection([1, 2, 3]);
@@ -73,8 +74,7 @@ class CollectionRollingAverageTest extends TestCase
         );
     }
 
-
-    /** @test */
+    #[Test]
     public function rollling_average_applies_weights_when_weight_size_is_less_than_collection_size()
     {
         $data = new Collection([1, 2, 2, 4, 5, 6]);
@@ -92,8 +92,7 @@ class CollectionRollingAverageTest extends TestCase
         $this->assertEquals($averages, $data->rollingAverage(4, false, $weights));
     }
 
-
-    /** @test */
+    #[Test]
     public function rollling_average_applies_weights_when_weight_size_is_larger_than_collection_size()
     {
         $data = new Collection([1, 2, 3]);
@@ -108,8 +107,7 @@ class CollectionRollingAverageTest extends TestCase
         $this->assertEquals($averages, $data->rollingAverage(4, false, $weights));
     }
 
-
-    /** @test */
+    #[Test]
     public function rollling_average_applies_weights_when_weight_size_is_less_than_collection_size_and_lookback_is_applied()
     {
         $data = new Collection([1, 2, 2, 4, 5, 6]);
@@ -124,8 +122,7 @@ class CollectionRollingAverageTest extends TestCase
         $this->assertEquals($averages, $data->rollingAverage(4, true, $weights));
     }
 
-
-    /** @test */
+    #[Test]
     public function rollling_average_applies_weights_when_weight_size_is_larger_than_collection_size_and_lookback_is_applied()
     {
         $data = new Collection([1, 2, 3, 1, 2, 3]);
