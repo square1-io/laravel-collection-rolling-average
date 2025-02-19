@@ -49,7 +49,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require --dev "laravel/framework:${{ matrix.laravel }}@dev" "orchestra/testbench:${{ matrix.testbench }}@dev" "phpunit/phpunit:${{ matrix.phpunit }}@dev" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}@dev" "orchestra/testbench:${{ matrix.testbench }}@dev" "phpunit/phpunit:${{ matrix.phpunit }}@dev" --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/phpunit
