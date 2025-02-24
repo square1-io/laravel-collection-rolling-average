@@ -10,35 +10,21 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        php: [8.0, 8.1, 8.2]
-        laravel: ['9.*', '10.*', '11.*']
+        php: [8.2, 8.3, 8.4]
+        laravel: ['12.*']
         dependency-version: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 10.*
-            testbench: 8.*
-            phpunit: 10.*
-          - laravel: 9.*
-            testbench: 7.*
-            phpunit: 9.*
-          - laravel: 11.*
-            testbench: 9.*
-            phpunit: 10.*
-        exclude:
-          - laravel: 10.*
-            php: 8.0
-          - laravel: 11.*
-            php: 8.0
-          - laravel: 11.*
-            php: 8.1
+          - laravel: 12.*
+            testbench: 10.*
+            phpunit: 11.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -50,7 +36,6 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
-          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/phpunit
-    # Add additional steps if necessary, like linting, code style checks, etc.
