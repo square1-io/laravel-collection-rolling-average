@@ -43,6 +43,18 @@ $ composer require square1/laravel-collection-rolling-average
 The package will be automatically registered.
 
 
+## Versioning
+This package is built on top of the collections in `Illuminate\Support`. With the release of `12.0.0`, this package follows the version constraints of `Illuminate\Support`, which itself mirrors Laravel's release versioning.
+
+Support for earlier versions prior to this change is listed in the table below.
+
+| Package Version | Laravel Version |
+|-----------------|-----------------|
+| 12.* | 12 |
+| 2.0.0 | 11, 10, 9, 8.7 |
+| 1.0.0 | 10, 9, 8.7 |
+
+
 ## Usage
 
 ### Rolling average
@@ -129,17 +141,6 @@ Add weightings to increase or decrease the relevance of the most recent entries.
       * ]);
       */
 ```
-
-## Versioning
-This package is built on top of the collections in `Illuminate\Support`. With the release of `12.0.0`, this package follows the version constraints of `Illuminate\Support`, which itself mirrors Laravel's release versioning.
-
-Support for earlier versions prior to this change is listed in the table below.
-
-| Package Version | Laravel Version |
-|-----------------|-----------------|
-| 12.* | 12 |
-| 2.0.0 | 11, 10, 9, 8.7 |
-| 1.0.0 | 10, 9, 8.7 |
 
 
 ## Tests
