@@ -50,6 +50,7 @@ Support for earlier versions prior to this change is listed in the table below.
 
 | Package Version | Laravel Version |
 |-----------------|-----------------|
+| 13.* | 13 |
 | 12.* | 12 |
 | 2.0.0 | 11, 10, 9, 8.7 |
 | 1.0.0 | 10, 9, 8.7 |
