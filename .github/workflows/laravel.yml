@@ -18,7 +18,7 @@ jobs:
         include:
           - laravel: 13.*
             testbench: 11.*
-            phpunit: 11.*
+            phpunit: 12.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
